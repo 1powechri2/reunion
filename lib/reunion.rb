@@ -10,4 +10,10 @@ class Reunion
   def add_activity(activity)
     @activities.push(activity)
   end
+
+  def eval_total_cost
+    @activities.reduce(0) do |sum, activity|
+      sum += activity.evaluate_total_cost
+    end
+  end
 end

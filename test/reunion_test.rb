@@ -29,4 +29,24 @@ class ReunionTest < Minitest::Test
     assert_equal "Blood Bath", reunion.activities[0].name
     assert_equal "Masquerade Ball", reunion.activities[1].name
   end
+
+  def test_eval_total_cost
+    reunion    = Reunion.new("Dracula's Castle")
+    activity_1 = Activity.new("Blood Bath", 200, 20)
+    activity_2 = Activity.new("Masquerade Ball", 500, 100)
+    person_1   = 'Mondo Dude'
+    amount_1   = 600
+    person_2   = 'Righteous Babe'
+    amount_2   = 850
+
+    activity_1.add_participants(person_1, amount_1)
+    activity_1.add_participants(person_2, amount_2)
+    activity_2.add_participants(person_1, amount_1)
+    activity_2.add_participants(person_2, amount_2)
+
+    reunion.add_activity(activity_1)
+    reunion.add_activity(activity_2)
+
+    assert 940, reunion.eval_total_cost
+  end
 end
