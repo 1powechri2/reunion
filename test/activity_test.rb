@@ -15,16 +15,23 @@ class ActivityTest < Minitest::Test
   end
 
   def test_can_take_participants
-    participants = participants = {'El Dude' => 500}
-    activity = Activity.new('Funhouse', participants)
-    activity = Activity.new('Funhouse', participants)
+    activity = Activity.new('Funhouse')
 
-    assert_equal 'El Dude', activity.participants.key(500)
+    participant = 'El Dude'
+    amount_paid = 500
+
+    activity.add_participants(participant, amount_paid)
+
+    assert_equal ({'El Dude' => 500}), activity.participants
   end
 
-  def test_add_participants
-    participants = {'El Dude' => 500}
-    activity = Activity.new('Funhouse', participants)
+  def test_add_multiple_participants
+    activity = Activity.new('Funhouse')
+
+    participant = 'El Dude'
+    amount_paid = 500
+
+    activity.add_participants(participant, amount_paid)
 
     new_participant = 'Kat'
     amount_paid     = 505
