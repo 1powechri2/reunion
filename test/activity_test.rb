@@ -13,4 +13,11 @@ class ActivityTest < Minitest::Test
     activity = Activity.new('Funhouse')
     assert_equal 'Funhouse', activity.name
   end
+
+  def test_can_take_participants
+    participants = {'El Dude' => 500}
+    activity = Activity.new('Funhouse', participants)
+
+    assert_equal 'El Dude', activity.participants.key(500)
+  end
 end
