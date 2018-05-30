@@ -6,4 +6,8 @@ class Activity
     @name = name
     @participants = participants
   end
+
+  def add_participants(new_participant, amount_paid)
+    @participants[new_participant] = amount_paid
+  end
 end

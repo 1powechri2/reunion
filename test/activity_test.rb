@@ -15,9 +15,25 @@ class ActivityTest < Minitest::Test
   end
 
   def test_can_take_participants
-    participants = {'El Dude' => 500}
+    participants = participants = {'El Dude' => 500}
+    activity = Activity.new('Funhouse', participants)
     activity = Activity.new('Funhouse', participants)
 
     assert_equal 'El Dude', activity.participants.key(500)
+  end
+
+  def test_add_participants
+    participants = {'El Dude' => 500}
+    activity = Activity.new('Funhouse', participants)
+
+    new_participant = 'Kat'
+    amount_paid     = 505
+
+    activity.add_participants(new_participant, amount_paid)
+
+    expected = {'El Dude' => 500, 'Kat' => 505}
+    actual   = activity.participants
+
+    assert_equal expected, actual
   end
 end
