@@ -4,7 +4,6 @@ require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/activity'
 require './lib/reunion'
-require 'pry'
 
 class ReunionTest < Minitest::Test
   def test_reunion_exists
