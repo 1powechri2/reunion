@@ -4,6 +4,7 @@ require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/activity'
 require './lib/reunion'
+require 'pry'
 
 class ReunionTest < Minitest::Test
   def test_reunion_exists
@@ -48,5 +49,28 @@ class ReunionTest < Minitest::Test
     reunion.add_activity(activity_2)
 
     assert 940, reunion.eval_total_cost
+  end
+
+  def test_owes_or_owed
+    reunion    = Reunion.new("Dracula's Castle")
+    activity_1 = Activity.new("Blood Bath", 200, 20)
+    activity_2 = Activity.new("Masquerade Ball", 500, 100)
+    person_1   = 'Mondo Dude'
+    amount_1   = 600
+    person_2   = 'Righteous Babe'
+    amount_2   = 850
+
+    activity_1.add_participants(person_1, amount_1)
+    activity_1.add_participants(person_2, amount_2)
+    activity_2.add_participants(person_1, amount_1)
+    activity_2.add_participants(person_2, amount_2)
+
+    reunion.add_activity(activity_1)
+    reunion.add_activity(activity_2)
+
+    reunion.eval_payment
+
+    expected = {'Mondo Dude' => 220, 'Righteous Babe' => -30}
+    actual   = reunion.owes_or_oweing
   end
 end
