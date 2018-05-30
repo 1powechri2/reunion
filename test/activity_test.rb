@@ -72,4 +72,37 @@ class ActivityTest < Minitest::Test
 
     assert_equal 520, activity.evaluate_total_cost
   end
+
+  def test_total_cost_per_person
+    activity = Activity.new('Funhouse', 500, 10)
+
+    participant = 'El Dude'
+    amount_paid = 500
+
+    activity.add_participants(participant, amount_paid)
+
+    new_participant = 'Kat'
+    amount_paid     = 505
+
+    activity.add_participants(new_participant, amount_paid)
+
+    assert_equal 260, activity.total_cost_per_person
+  end
+
+  def test_owes_or_owed
+    activity = Activity.new('Funhouse', 500, 10)
+
+    participant = 'El Dude'
+    amount_paid = 500
+
+    activity.add_participants(participant, amount_paid)
+
+    new_participant = 'Kat'
+    amount_paid     = 505
+
+    activity.add_participants(new_participant, amount_paid)
+
+    assert_equal -240, activity.owes_or_owed('El Dude')
+    assert_equal -245, activity.owes_or_owed('Kat')
+  end
 end

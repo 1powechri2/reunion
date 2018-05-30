@@ -19,4 +19,12 @@ class Activity
     total_per_person = @cost_per_person * @participants.keys.length
     return @base_cost + total_per_person
   end
+
+  def total_cost_per_person
+    (@base_cost / @participants.keys.length) + @cost_per_person
+  end
+
+  def owes_or_owed(person)
+    total_cost_per_person - @participants[person]
+  end
 end
